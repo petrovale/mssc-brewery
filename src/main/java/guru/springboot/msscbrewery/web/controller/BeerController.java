@@ -3,6 +3,7 @@ package guru.springboot.msscbrewery.web.controller;
 import guru.springboot.msscbrewery.services.BeerService;
 import guru.springboot.msscbrewery.web.model.BeerDto;
 import java.util.UUID;
+import javax.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class BeerController {
   }
 
   @PostMapping // POST - create new beer
-  public ResponseEntity handlePost(@RequestBody BeerDto beerDto){
+  public ResponseEntity handlePost(@Valid @RequestBody BeerDto beerDto){
 
     BeerDto savedDto = beerService.saveNewBeer(beerDto);
 
@@ -45,7 +46,7 @@ public class BeerController {
   }
 
   @PutMapping({"/{beerId}"})
-  public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
+  public ResponseEntity handleUpdate(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto){
 
     beerService.updateBeer(beerId, beerDto);
 
